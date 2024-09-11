@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page 2</title>
+    <style>
+        body{
+            background-color: antiquewhite;
+            font-family:Arial, Helvetica, sans-serif;
+            }
+    </style>
+</head>
+
+<body>
+    
+    <a href="/hello/">Home</a><br>
+    <a href="/about-page/">About</a><br>
+    <a href="/contact-page/">Contact</a><br>
+
+    <center><h1>This Is The Contact Page</h1></center>
+
+    <img src="{% static 'images/Desert.jpg' %}" alt="Desert" width="100%" height="500">
+
+    <form action="">
+        <label for="usercountry">select your country</label>
+            <select name="country" id="">
+                <option value="---">_choose</option>
+                <option value="Nigeria">Nigeria</option>
+                <option value="Ghana">Ghana</option>
+                <option value="South Africa">South Africa</option>
+            </select><br><br>
+
+            <label for="usercomment"></label>
+            <textarea name="Comment" id="usercomment" cols="25" rows="5">This is a text area</textarea><br><br>
+
+            <label for="userdocument"></label>
+            <input type="file" name="" id="userdocument" accept=".png, .docx, "><br><br>
+
+            <input type="submit" value="login">
+            <button type="submit">sign-up</button>
+    </form>
+</body>
+</html>

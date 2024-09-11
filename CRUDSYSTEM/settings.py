@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a+#h&=xdfd89!2qf@i9d^w8in@at0xlqz*fnpeki+061@&+^t8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'damolaap.pythonanywhere.com']
 
@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'damolaap.pythonanywhere.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'HelloApp',
+    'BlogApp',
     'CRUDAPP',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -121,6 +123,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR/'staticfiles']
 
 STATIC_ROOT = BASE_DIR/'all_staticfiles'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

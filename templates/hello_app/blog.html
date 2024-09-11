@@ -1,0 +1,7 @@
+<ul>
+{% for post in all_data %}
+<li>
+    <a href="/blog/{{post.id}}">{{post.post_title}}</a>
+</li>
+{% endfor %}
+</ul>

@@ -55,14 +55,14 @@ def show_index(request):
         'word_def' : word_def,
         'word_ex' : word_ex,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'crud_app/index.html', context)
 
 def user_index(request):
     posts = Post.objects.all()
     context = {
         'posts' : posts,
     }
-    return render(request, 'user_index.html', context)
+    return render(request, 'crud_app/user_index.html', context)
 
 def show_login(request):
     if request.user.is_authenticated:
@@ -86,7 +86,7 @@ def show_login(request):
     context = {
         #'login_form' : Login_form(),
     }
-    return render(request, 'login.html', context)
+    return render(request, 'crud_app/login.html', context)
 
 def show_signup(request):
     if request.method == 'POST':
@@ -105,7 +105,7 @@ def show_signup(request):
         new_user.save()
         return render(request, 'signup.html', {'message': 'Account created Successfully!'})
 
-    return render(request, 'signup.html')
+    return render(request, 'crud_app/signup.html')
 
 @login_required(login_url='/login/')
 def show_pwrdreset(request,):
@@ -129,7 +129,7 @@ def show_pwrdreset(request,):
         messages.success(request, 'Password changed successfully')
         
         
-    return render(request, 'pwrdreset.html')
+    return render(request, 'crud_app/pwrdreset.html')
 
 @login_required
 def show_profile(request):
@@ -155,7 +155,7 @@ def show_profile(request):
         'posts_num' : posts_num,
         'user_bio' : user_bio,
     }
-    return render(request, 'profile.html', context)
+    return render(request, 'crud_app/profile.html', context)
 
 @login_required
 def edit_profile(request):
@@ -208,7 +208,7 @@ def edit_profile(request):
             'user' : user,
             'user_bio' : user_bio,
         }
-    return render(request, 'edit_profile.html',context)
+    return render(request, 'crud_app/edit_profile.html',context)
 
 @login_required
 def show_logout(request):
@@ -240,7 +240,7 @@ def post_edit(request, id):
     context = {
         'post' : post,
     }
-    return render(request,'profile.html', context)
+    return render(request,'crud_app/profile.html', context)
 
 def single_post(request, id):
     post = Post.objects.get(id = id)
@@ -258,13 +258,13 @@ def single_post(request, id):
         'comments' : user_comment,
         'post' : post,
     }
-    return render(request, 'single_post.html', context)
+    return render(request, 'crud_app/single_post.html', context)
 
 def delete_comment(request, id):
     comment = Comment.objects.get(id = id)
     comment.delete()
     messages.success(request, 'comment deleted successfully')
-    return render(request, 'single_post.html')
+    return render(request, 'crud_app/single_post.html')
 
 
 # Create your views here.

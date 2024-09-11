@@ -1,0 +1,10 @@
+<h1>This is an Empty page</h1>
+<h1>
+    {% if data is not None %}
+        {{data.fname}}
+        {{data.lname}}
+        {{data.age}}
+    {% else %}
+        Id does not exist!
+    {% endif %}
+</h1>

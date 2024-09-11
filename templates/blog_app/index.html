@@ -1,0 +1,84 @@
+{% extends 'blog_app/base.html' %}
+
+{% load static %}
+
+
+{% block idk %}
+    <h1>hello</h1>
+{% endblock idk %}
+    
+
+
+{% block body %}
+<div class="row tm-row">
+
+    {% for post in blog_data %}
+    
+    <article class="col-12 col-md-6 tm-post">
+        <hr class="tm-hr-primary">
+        <a href="/post/{{post.id}}/" class="effect-lily tm-post-link tm-pt-60">
+            <div class="tm-post-link-inner">
+                
+                {% if post.blog_cover %}
+                <img src="{{post.blog_cover.url}}" alt="Image" class="img-fluid"> 
+                
+                {% else %}
+                <img src="{% static 'img/img-01.jpg' %}" alt="Image" class="img-fluid"> 
+                    
+                {% endif %}
+                    
+            </div>
+            <span class="position-absolute tm-new-badge">New</span>
+            <h2 class="tm-pt-30 tm-color-primary tm-post-title">{{post.blog_title |truncatewords:"3"}}</h2>
+        </a>                    
+        <p class="tm-pt-30">
+            {{post.blog_content |truncatechars:"100"}}
+        </p>
+        <div class="d-flex justify-content-between tm-pt-45">
+            {% if post.category %}
+            <span class="tm-color-primary"><a href="/category/{{post.category}}/">{{post.category}}</a></span>
+            {% else %}
+            <span class="tm-color-primary"><a href="/category/{{post.category}}/">None categorized</a></span>
+            {% endif %}
+            <span class="tm-color-primary">{{post.blog_date}}</span>
+        </div>
+        <hr>
+        <div class="d-flex justify-content-between">
+            <span>{{post.comments_set.all | length}} comment{{post.comments_set.all | length | pluralize}}</span>
+            <span>by Apex</span>
+        </div>
+    </article>
+
+    {% empty %}
+        <h2>Sorry, there's no such post!</h2>
+
+    {% endfor %}
+
+</div>
+<div class="row tm-row tm-mt-100 tm-mb-75">
+    <div class="tm-prev-next-wrapper">
+        <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next disabled tm-mr-20">Prev</a>
+        <a href="#" class="mb-2 tm-btn tm-btn-primary tm-prev-next">Next</a>
+    </div>
+    <div class="tm-paging-wrapper">
+        <span class="d-inline-block mr-3">Page</span>
+        <nav class="tm-paging-nav d-inline-block">
+            <ul>
+                <li class="tm-paging-item active">
+                    <a href="#" class="mb-2 tm-btn tm-paging-link">1</a>
+                </li>
+                <li class="tm-paging-item">
+                    <a href="#" class="mb-2 tm-btn tm-paging-link">2</a>
+                </li>
+                <li class="tm-paging-item">
+                    <a href="#" class="mb-2 tm-btn tm-paging-link">3</a>
+                </li>
+                <li class="tm-paging-item">
+                    <a href="#" class="mb-2 tm-btn tm-paging-link">4</a>
+                </li>
+            </ul>
+        </nav>
+    </div>                
+</div>
+{% endblock body %}
+

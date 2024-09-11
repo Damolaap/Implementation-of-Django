@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <a href="">Home</a><br>
+    <a href="/about-page/">About</a><br>
+    <a href="/contact-page/">Contact</a><br>
+    <a href="/">CrudApp</a><br>
+    <a href="/blogs/">BlogApp</a><br>
+
+    <img src="{% static 'images/Chrysanthemum.jpg' %}" alt="Chrysanthemum" width="100%" height="500">
+
+    <center><h1>This Is The Index Page</h1></center>
+
+    {% comment %} <p>My name is {{name}} <br> My house address is {{address}}</p> {% endcomment %}
+    <p>Your personal details: <br> First name: {{firstname}} <br>
+                                    Last name: {{lastname}} <br>
+                                    Age: {{age}} <br>
+                                    
+
+
+
+                                    
+                                    Loop: {{loop}}
+    </p>
+    {% for item in loop %}
+    show me <b>{{item}}</b> <br>
+    {% endfor %}
+
+    {% if age == 18 %}
+        <h1>Hey guys this is damola</h1>
+    {% elif age > 18 %}
+        <h3>This is not true</h3>
+    {% else %}
+        <p style="color: rgb(253, 0, 0)">Ah! the page is not fine at all :(</p>
+    {%endif%}
+
+    <ul>
+        {% for i in even_random %}
+        <li>{{i}}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Something Aesthetic... :)</p>
+   
+    <ul>
+        <li>Cars:
+            <ol>
+                <li>Ford Mustang</li>
+                <li>Supra Mk5</li>
+                <li>BMW Comp 4</li>
+            </ol>
+        </li>
+        <li>Fruits:
+            <ol>
+                <li>Orange</li>
+                <li>Watermelon</li>
+                <li>Banana</li>
+            </ol>
+        </li>
+        <li>Elements:
+            <ol>
+                <li>Hydrogen</li>
+                <li>Helium</li>
+                <li>Lithium</li>
+            </ol>
+        </li>
+        <li>Programming Languages:
+            <ol>
+                <li>Python</li>
+                <li>Rust</li>
+                <li>Java</li>
+            </ol>
+        </li>
+    </ul>
+</body>
+
+</html>

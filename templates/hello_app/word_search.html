@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hawk-Eye</title>
+    {% comment %} God's Eye {% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="">
+
+</head>
+<body>
+    
+    <form action="">
+        <input type="text" name="search" id="search" placeholder="Search here..."> <br><br>
+        <input type="submit" value="search">
+    </form>
+
+        
+      
+
+        <h2>Word: {{word}}</h2>
+
+        <p>
+            {% if word == '' %}
+                <p>Enter a word</p>
+            {% else %}
+                {% if word_def %}
+                <h2>Definitions:</h2>
+                    <ul>
+                    {% for items in word_def %}
+                        <li>
+                            {{items}}
+                        </li> <br>
+                    {% endfor %}
+                    </ul>
+                    <h2>Examples:</h2>
+                    <ul>
+                        {% for examples in word_ex %}
+                            <li>
+                                {{examples}}
+                            </li> <br>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>Word not available</p>
+                {% endif %}
+            {% endif %}
+        </p>
+    <script>
+        
+    </script>
+</body>
+</html>
