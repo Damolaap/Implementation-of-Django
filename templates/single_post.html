@@ -30,6 +30,14 @@
                     {% for comment in comments %}
                     <div class="post-title">From: {{ comment.email }}</div>
                     <div class="post-content">{{comment.comment}}</div>
+
+                    
+                    {% if request.user.is_authenticated %}
+                    <div class="post-actions">
+                        <a href="/comment-delete/{{ comment.id }}/">Delete</a>
+                    </div>
+                    {% endif %}
+
                     {% endfor %}
                 </div>       
             </div>

@@ -40,19 +40,19 @@
                 </div>
                 <div class="form-group">
                     <label for="age">Age</label>
-                    <input type="number" name="age" value="{{ user_bio.age }}">
+                    <input type="number" name="age" value="{{ user_bio.age }}" required>
                 </div>
                 <div class="form-group">
                     <label for="phone_num">Phone Number</label>
-                    <input type="number" name="phone_num" value="{{ user_bio.phone_num }}">
+                    <input type="number" name="phone_num" value="{{ user_bio.phone_num }}" required>
                 </div>
                 <div class="form-group">
                     <label for="country">Country</label>
-                    <input type="text" name="country" value="{{ user_bio.country }}">
+                    <input type="text" name="country" value="{{ user_bio.country }}" required>
                 </div>
                 <div class="form-group">
                     <label for="about">About</label>
-                    <input type="text" name="about" value="{{ user_bio.about }}">
+                    <input type="text" name="about" value="{{ user_bio.about }}" required>
                 </div>
                 <div class="form-group">
                     <input class="submit-btn" type="submit" value="Update Profile">

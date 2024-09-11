@@ -16,10 +16,10 @@ class UserBio(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     GENDER_CHOICES = [('M','Male'), ('F', 'Female'), ('NB', 'Non Binary'), ('O', 'Other')]
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default='O')
-    age = models.IntegerField()
-    phone_num = models.IntegerField()
-    country = models.CharField(max_length=50)
-    about = models.CharField(max_length=400)
+    age = models.IntegerField(null=True)
+    phone_num = models.IntegerField(null=True, blank=True)
+    country = models.CharField(max_length=50, null=True)
+    about = models.CharField(max_length=400, null=True)
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

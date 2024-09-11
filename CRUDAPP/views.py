@@ -11,9 +11,49 @@ from django import forms
 @login_required
 def show_index(request):
     user = User.objects.get(username = request.user)
+
+    if request.method == 'GET':
+        import requests
+        from pprint import pprint
+        base_url = 'https://api.dictionaryapi.dev/api/v2/entries/en/'
+        user_src = request.GET.get('search', '')
+        base_url += user_src
+        word_def = []
+        word_ex = []
+
+        try:
+            print('Definitions: ')
+            count = 0
+            result = requests.get(base_url).json()
+            
+            for items in result:
+                for meaning in items['meanings']:
+                    for definitions in meaning['definitions']:
+                        count += 1
+                        word_def.append(definitions['definition'])
+                        #print(f"{count}. {definitions['definition']}")
+                        
+            
+            count = 0
+            for items in result:
+                for meaning in items['meanings']:
+                    for examples in meaning['definitions']:
+                        if 'example' in examples:
+                            count += 1
+                            word_ex.append(examples['example'])
+                            #print(f"{count}.", examples['example'])
+
+        except ConnectionError as e:
+            print(e)
+        except Exception as e:
+            print(e)
+
     context = {
         'user' : user,
-        'posts' : Post.objects.filter(owner = request.user)
+        'posts' : Post.objects.filter(owner = request.user),
+        'word' : user_src,
+        'word_def' : word_def,
+        'word_ex' : word_ex,
     }
     return render(request, 'index.html', context)
 
@@ -44,7 +84,7 @@ def show_login(request):
             return redirect('/login/')
 
     context = {
-        'login_form' : Login_form(),
+        #'login_form' : Login_form(),
     }
     return render(request, 'login.html', context)
 
@@ -140,15 +180,27 @@ def edit_profile(request):
         user.last_name = new_lname
         user.email = new_email
 
-        user_bio.owner = user
-        user_bio.gender = new_gender
-        user_bio.age = new_age
-        user_bio.phone_num = new_phone_num
-        user_bio.country = new_country
-        user_bio.about = new_about
-
         user.save()
+
+        if user_bio:
+            user_bio.owner = user
+            user_bio.gender = new_gender
+            user_bio.age = new_age
+            user_bio.phone_num = new_phone_num
+            user_bio.country = new_country
+            user_bio.about = new_about
+            
+        else:
+            user_bio = UserBio.objects.create(owner = user, 
+                                              gender = new_gender, 
+                                              age = new_age,
+                                              phone_num = new_phone_num,
+                                              country = new_country,
+                                              about = new_about)
+            
+          
         user_bio.save()
+        
         messages.success(request, 'Profile Updated')
         return redirect('/profile/')
     
@@ -208,6 +260,11 @@ def single_post(request, id):
     }
     return render(request, 'single_post.html', context)
 
+def delete_comment(request, id):
+    comment = Comment.objects.get(id = id)
+    comment.delete()
+    messages.success(request, 'comment deleted successfully')
+    return render(request, 'single_post.html')
 
 
 # Create your views here.
